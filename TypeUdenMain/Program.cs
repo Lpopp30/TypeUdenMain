@@ -7,20 +7,19 @@ string Word = Console.ReadLine();
 Console.WriteLine("Skriv en tekst:");
 string Text = Console.ReadLine();
 
-Console.WriteLine($"Ordet '{Word}' forekommer {WordCount.CountWords(Word, Text)} gange i teksten.");
-bool? ResultBool = WordCount.TrueOrFalse(WordCount.CountWords(Word, Text), Word, Text);
+Result<bool> ResultBool = WordCount.TrueOrFalse(WordCount.CountWords(Word, Text), Word, Text);
 
-if  (ResultBool == null)
+if (ResultBool.IsSuccess == false)
 {
-    Console.WriteLine("Det søgte ord findes ikke i det angivet tekst");
+    Console.WriteLine($"Fejl: {ResultBool.Error}");
 }
-else if (ResultBool == false)
+
+else if (ResultBool.Value == false)
 {
     Console.WriteLine($"Ordet '{Word}' forkommer {WordCount.CountWords(Word, Text)} gange");
 }
-else
+else if (ResultBool.Value == true)
 {
-
     Console.WriteLine($"Det søgte ord '{Word}' findes {WordCount.CountWords(Word, Text)} gange i det angivet tekst");
     Console.WriteLine("Hvor ville du gerne gemme loggen? (Skriv en sti eller tryk enter for at gemme i projektmappen)");
     string filePath = Console.ReadLine();
