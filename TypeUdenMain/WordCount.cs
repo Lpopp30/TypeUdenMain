@@ -32,11 +32,26 @@ namespace TypeUdenMain
             
             else if (count >= 1 && count <= 10)
                 return false;
-            
+
             else
-                File.WriteAllText("C:\\Users\\lpopp\\filename.txt", Text);
-            return true;
+                return true;
             
+        }
+
+        public static string SaveToFile(string filePath, string text)
+        {
+            if (string.IsNullOrEmpty(filePath))
+            {
+                string projectFolder = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
+
+                filePath = Path.Combine(projectFolder, "log.txt");
+
+            }
+            
+
+
+            File.WriteAllText(filePath, text);
+            return filePath;
         }
     }
 }

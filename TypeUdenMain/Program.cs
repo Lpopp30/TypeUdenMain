@@ -20,6 +20,9 @@ else if (ResultBool == false)
 }
 else
 {
+
     Console.WriteLine($"Det søgte ord '{Word}' findes {WordCount.CountWords(Word, Text)} gange i det angivet tekst");
-    
+    Console.WriteLine("Hvor ville du gerne gemme loggen? (Skriv en sti eller tryk enter for at gemme i projektmappen)");
+    string filePath = Console.ReadLine();
+    Console.WriteLine($"Filen er gemt i {WordCount.SaveToFile(filePath, Text)}");
 }
